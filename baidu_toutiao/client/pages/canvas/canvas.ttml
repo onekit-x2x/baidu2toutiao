@@ -1,0 +1,8 @@
+<view  class="wrap">
+    <view  tt:if="{{canvasShow}}" class="canvas-wrap {{canvasOff}}">
+        <canvas  canvas-id="myCanvas" class="canvas" bindtouchend="canvas" bindtouchmove="mvcan"></canvas>
+    </view>
+    <swan-button  class="btn" type="primary" bindtap="showcanvas">展示canvas</swan-button>
+    <swan-button  class="btn" type="primary" bindtap="delcanvas">删除canvas</swan-button>
+    <swan-button  class="btn" type="primary" bindtap="sendadraw">执行一条绘制指令</swan-button>
+</view>

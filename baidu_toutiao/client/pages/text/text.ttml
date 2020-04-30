@@ -1,0 +1,5 @@
+<view  class="wrap">
+    <text >{{text}}</text>
+    <swan-button  class="btn" type="primary" bindtap="add">add text</swan-button>
+    <swan-button  class="btn" type="primary" bindtap="remove">remove text</swan-button>
+</view>
