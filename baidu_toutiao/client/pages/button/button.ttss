@@ -1,13 +1,13 @@
-/**
+/* *
  * @demo page component for button
  * @author lvlei
  */
 
-.wrap {
+/* .wrap {
     font-size: 16px;
     padding-top: 70px;
-}
-.mini-btn-content {
+} */
+/* .mini-btn-content {
     margin-bottom: 12px;
 }
 .title {
@@ -52,4 +52,4 @@
 }
 .btn-bottom {
     padding-bottom: 20px;
-}
+} */

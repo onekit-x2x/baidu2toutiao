@@ -1,9 +1,11 @@
-body {
-    padding-top: 35px;
-}
 .btn {
-    margin: 15px 23px 0;
+    margin: .15rem .23rem 0;
 }
 .nav {
     display: block;
+}
+
+.navigator-hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: .7;
 }

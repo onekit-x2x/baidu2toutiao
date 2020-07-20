@@ -101,11 +101,11 @@
     margin-top: 03px;
 }
 
-button {
+.onekit-button {
     margin-top: 20px;
 }
 
-swan-textarea {
+.onekit-swan-textarea {
     width: auto;
 }
 

@@ -17,7 +17,7 @@
     color: #666;
 }
 
-.rowlike view {
+.rowlike .onekit-view {
     flex: 1;
     text-align: center;
     font-size: 16px;
@@ -34,7 +34,7 @@
     width: 240px;
 }
 
-.collike view {
+.collike .onekit-view {
     height: 120px;
     line-height: 120px;
     flex: 1;

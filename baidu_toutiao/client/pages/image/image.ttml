@@ -1,16 +1,20 @@
-<view  class="container">
-    <view  class="wrap">
-        <view  class="title">Local Image</view>
-        <view  class="img-box local-img">
-            <image  class="swan-icon" src="../../images/local-image.png"></image>
-        </view>
-        <view  class="title">Internet Image</view>
-        <view  class="img-box internet-img">
-            <image  class="swan-icon" src="../../images/internet-image.png"></image>
-        </view>
+<view class="wrap">
+    <view class="mode-title" style="margin-top:.2rem">
+        <view class="mode-title-line-left"></view>
+        <view class="mode-title-text">自定义缩放模式</view>
+        <view class="mode-title-line-right"></view>
     </view>
-    <view  class="page-title">
-        <view  class="page-title-line"></view>
-        <view  class="page-title-text">image</view>
+    <view class="card-area" tt:for="{{scaleArray}}">
+        <onekit-image Class="image-area {{item.hasBackgroud == 1 ? 'backGround': ''}}" data-name="{{item.mode}}" bindtap="onTap" mode="{{item.mode}}" src="{{src}}" binderror="imageError" bindload="imageLoad" />
+        <view class="bottom-description">{{item.text}}</view>
+    </view>
+    <view class="mode-title" style="margin-top: .5rem">
+        <view class="mode-title-line-left"></view>
+        <view class="mode-title-text">不缩放图片，自定义裁切模式</view>
+        <view class="mode-title-line-right"></view>
+    </view>
+    <view class="card-area" tt:for="{{cutArray}}">
+        <onekit-image Class="image-area" data-name="{{item.mode}}" bindtap="onTap" mode="{{item.mode}}" src="{{src}}" binderror="imageError" bindload="imageLoad" />
+        <view class="bottom-description">{{item.text}}</view>
     </view>
 </view>

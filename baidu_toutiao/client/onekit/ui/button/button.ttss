@@ -1,4 +1,4 @@
-.swan-button {
+/* .onekit-button {
 stylesheetposition: relative;
 display: block;
 margin-bottom: 15px;
@@ -18,8 +18,8 @@ color: #000;
 background-color: #f8f8f8;
 
 }
-.swan-button[data-type=primary] {
+.onekit-button[data-type=primary] {
     color:#fff;
     background-color:#3c76ff;
 }
-
+ */

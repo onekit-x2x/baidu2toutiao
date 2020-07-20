@@ -1,11 +1,11 @@
 {
-    "setting": {
-        "urlCheck": true,
-        "es6": true,
-        "postcss": true,
-        "minified": true,
-        "newFeature": true
-    },
-    "appid": "tt254d53f0ba67cf71",
-    "projectname": "demo"
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"appid": "sttae9dd82031b784d1",
+	"projectname": "demo"
 }

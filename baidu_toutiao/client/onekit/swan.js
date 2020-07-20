@@ -1,16 +1,19 @@
 import onekit from "onekit"
 import swan_ai from "swan.ai"
+import CanvasContext from "./api/CanvasContext"
+import LivePlayerContext from "./api/LivePlayerContext"
+import VideoContext from "./api/VideoContext"
 export default class swan {
-  static getData(that,key) { return that.data[key]; }
-  static setData(that,key,data) { 
-    if(typeof(key)=="string"){
-    var json = {};
-    json[key] = data;
-    return that.setData(json);
-  }else{
+  static getData(that, key) { return that.data[key]; }
+  static setData(that, key, data) {
+    if (typeof (key) == "string") {
+      var json = {};
+      json[key] = data;
+      return that.setData(json);
+    } else {
       that.setData(key);
+    }
   }
-     }
   /////////////////// animation //////////////////////////
   static createAnimation(object) { return tt.createAnimation(object); }
   ///////////////// basic ////////////////////////////////
@@ -31,8 +34,16 @@ export default class swan {
   static onAppHide(object) { return tt.onAppHide(object); }
   static setEnableDebug(object) { return tt.setEnableDebug(object); }
   static getLogManager(object) { return tt.getLogManager(object); }
-  static createContext() { return new CanvasContext(); }
-  static createCanvasContext(object) { return tt.createCanvasContext(object ); }
+  static createContext() { return new Context(); }
+  static createCanvasContext(canvasId) {
+    return new CanvasContext(tt.createCanvasContext(canvasId));
+  }
+  static createLivePlayerContext(livePlayerId) {
+    return new LivePlayerContext(tt.createLivePlayerContext(livePlayerId));
+  }
+  static createVideoContext(videoId) {
+    return new VideoContext(tt.createVideoContext(videoId));
+  }
   static canvasToTempFilePath(object) { return tt.canvasToTempFilePath(object); }
   static canvasPutImageData(object) { return tt.canvasPutImageData(object) };
   static canvasGetImageData(object) { return tt.canvasGetImageData(object) };
@@ -40,7 +51,7 @@ export default class swan {
   static onBeaconServiceChange(object) { return tt.onBeaconServiceChange(object); }
   static onBeaconUpdate(object) { return tt.onBeaconUpdate(object); }
   static getBeacons(object) { return tt.getBeacons(object); }
-  static stopBeaconDiscovery(object) { return tt.stopBeaconDiscovery(object);  }
+  static stopBeaconDiscovery(object) { return tt.stopBeaconDiscovery(object); }
   static startBeaconDiscovery(object) { return tt.startBeaconDiscovery(object); }
   static stopWifi(object) { return tt.stopWifi(object); }
   static startWifi(object) { return tt.startWifi(object); }
@@ -63,7 +74,7 @@ export default class swan {
   static onCompassChange(callback) { return tt.onCompassChange(callback); }
   static stopCompass(object) { return tt.stopCompass(object); }
   static startCompass(object) { return tt.startCompass(object); }
-  static addPhoneContact(object) {return tt.addPhoneContact(object); }
+  static addPhoneContact(object) { return tt.addPhoneContact(object); }
   static onGyroscopeChange(callback) { return tt.onGyroscopeChange(object); }
   static stopGyroscope(object) { return tt.stopGyroscope(object); }
   static startGyroscope(object) { return tt.startGyroscope(object); }
@@ -98,7 +109,7 @@ export default class swan {
   //
   static stopBluetoothDevicesDiscovery(object) {/* return tt.stopBluetoothDevicesDiscovery(object);*/ }
   static startBluetoothDevicesDiscovery(object) { return tt.startBluetoothDevicesDiscovery(object); }
-  static openBluetoothAdapter(object) {/* return tt.openBluetoothAdapter(object); */}
+  static openBluetoothAdapter(object) {/* return tt.openBluetoothAdapter(object); */ }
   static onBluetoothDeviceFound(object) { return tt.onBluetoothDeviceFound(object); }
   static onBluetoothAdapterStateChange(object) { return tt.onBluetoothAdapterStateChange(object); }
   static getConnectedBluetoothDevices(object) { return tt.getConnectedBluetoothDevices(object); }
@@ -156,14 +167,14 @@ export default class swan {
   static seekBackgroundAudio(object) { return tt.seekBackgroundAudio(object) }
   static pauseBackgroundAudio(object) { return tt.pauseBackgroundAudio(object) }
   static playBackgroundAudio(object) { return tt.playBackgroundAudio(object) }
-  static getBackgroundAudioPlayerState(object) { return tt.getBackgroundAudioPlayerState(object)  }
+  static getBackgroundAudioPlayerState(object) { return tt.getBackgroundAudioPlayerState(object) }
   static getBackgroundAudioManager(object) { return tt.getBackgroundAudioManager(object) }
   static createLivePusherContext(object) { return tt.createLivePusherContext(object) }
   static getRecorderManager(object) { return tt.getRecorderManager(object) }
   //////////////// Network ///////////////
   static request(object) { return tt.request(object); }
   static downloadFile(object) { return tt.downloadFile(object) }
-  static uploadFile(object) {return tt.uploadFile(object) }
+  static uploadFile(object) { return tt.uploadFile(object) }
   //
   static connectSocket(object) { return tt.connectSocket(object) }
   static onSocketError(object) { return tt.onSocketError(object) }
@@ -206,7 +217,37 @@ export default class swan {
 
   static reportMonitor(object) { return tt.reportMonitor(object) }
   static reportAnalytics(object, eventName) { return tt.reportAnalytics(object, eventName) }
-  static requestPayment(object) { return tt.requestPayment(object); }
+  static requestPolymerPayment(object) {
+    swan.login({
+      success(res) {
+        var code = res.code;
+        var url = getApp().onekitwx.server + "orderinfo";
+        var service = "1";
+        tt.request({
+          url: url,
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          method: "POST",
+          data: {
+            orderInfo: JSON.stringify(object.orderInfo),
+            code
+          },
+          success(res) {
+            console.log(res);
+            var object2 = {
+              orderInfo: JSON.stringify(res.data),
+              service: service,
+              success: object.success,
+              fail: object.fail,
+              complete: object.complete
+            };
+            tt.pay(object2);
+          }
+        });
+      }
+    });
+  }
   static authorize(object) { return tt.authorize(object) }
   static openSetting(object) { return tt.openSetting(object) }
   static getSetting(object) { return tt.getSetting(object) }
@@ -263,9 +304,9 @@ export default class swan {
   static clearStorage(object) { return tt.clearStorage(object) }
   static removeStorageSync(object) { return tt.removeStorageSync(object) }
   static removeStorage(object) { return tt.removeStorage(object) }
-  static setStorageSync (key, value) { return tt.setStorageSync(key,value) }
+  static setStorageSync(key, value) { return tt.setStorageSync(key, value) }
   static setStorage(object) { return tt.setStorage(object) }
-  static getStorageSync (key) { return tt.getStorageSync(key); }
+  static getStorageSync(key) { return tt.getStorageSync(key); }
   static getStorage(object) { return tt.getStorage(object) }
   ////////////// UI ////////////////
   static showActionSheet(object) { return tt.showActionSheet(object); }
@@ -277,20 +318,20 @@ export default class swan {
   static showToast(object) { return tt.showToast(object); }
   static showModal(object) { return tt.showModal(object); }
   static setNavigationBarColor(object) { return tt.setNavigationBarColor(object) }
-  static hideNavigationBarLoading(object) {return /*tt.hideNavigationBarLoading(object)*/}
-  static showNavigationBarLoading(object) {return/* tt.showNavigationBarLoading(object)*/}
+  static hideNavigationBarLoading(object) { return /*tt.hideNavigationBarLoading(object)*/ }
+  static showNavigationBarLoading(object) { return/* tt.showNavigationBarLoading(object)*/ }
   static setNavigationBarTitle = function (object) { return tt.setNavigationBarTitle(object); };
   static setBackgroundTextStyle(object) { return tt.setBackgroundTextStyle(object) }
 
-  static setBackgroundColor(object) { return tt.setBackgroundColor(object)  }
+  static setBackgroundColor(object) { return tt.setBackgroundColor(object) }
   static setTabBarItem(object) { return tt.setTabBarItem(object) }
-  static setTabBarStyle(object) {return tt.setTabBarStyle(object) }
-  static hideTabBar(object) { return tt.hideTabBar(object)  }
+  static setTabBarStyle(object) { return tt.setTabBarStyle(object) }
+  static hideTabBar(object) { return tt.hideTabBar(object) }
   static showTabBar(object) { return tt.showTabBar(object) }
-  static hideTabBarRedDot(object) { return tt.hideTabBarRedDot(object)  }
-  static showTabBarRedDot(object) { return tt.showTabBarRedDot(object)  }
+  static hideTabBarRedDot(object) { return tt.hideTabBarRedDot(object) }
+  static showTabBarRedDot(object) { return tt.showTabBarRedDot(object) }
   static removeTabBarBadge(object) { return tt.removeTabBarBadge(object) }
-  static setTabBarBadge(object) { return tt.setTabBarBadge(object)  }
+  static setTabBarBadge(object) { return tt.setTabBarBadge(object) }
 
   static loadFontFace(object) { return tt.loadFontFace(object) }
 
@@ -313,11 +354,11 @@ export default class swan {
   static createARCameraContext(object) { throw new Error("createARCameraContext�ݲ�֧��!!") }
 }
 swan.ai = {};
-for (var api of ["ocrIdCard", "ocrBankCard", "ocrDrivingLicense", "ocrVehicleLicense", "textReview", "textToAudio", "imageAudit", "advancedGeneralIdentify", "objectDetectIdentify", "carClassify", "dishClassify", "logoClassify", "animalClassify", "plantClassify", "getVoiceRecognizer", "faceDetect", "faceMatch", "faceSearch", "facePersonVerify", "facePersonIdmatch", "faceLivenessSessioncode","nlpLexerCustom"]){
+for (var api of ["ocrIdCard", "ocrBankCard", "ocrDrivingLicense", "ocrVehicleLicense", "textReview", "textToAudio", "imageAudit", "advancedGeneralIdentify", "objectDetectIdentify", "carClassify", "dishClassify", "logoClassify", "animalClassify", "plantClassify", "getVoiceRecognizer", "faceDetect", "faceMatch", "faceSearch", "facePersonVerify", "facePersonIdmatch", "faceLivenessSessioncode", "nlpLexerCustom"]) {
   ai_init(api);
 }
- function  ai_init(api){
-   swan.ai[api] = (object)=>{
-     return swan_ai.run(api,object);
-   }
+function ai_init(api) {
+  swan.ai[api] = (object) => {
+    return swan_ai.run(api, object);
+  }
 }

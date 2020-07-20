@@ -1,8 +1,16 @@
-<view  class="wrap">
-    <view  tt:if="{{canvasShow}}" class="canvas-wrap {{canvasOff}}">
-        <canvas  canvas-id="myCanvas" class="canvas" bindtouchend="canvas" bindtouchmove="mvcan"></canvas>
+<custom chineseName="画布" engName="canvas"></custom>
+<view class="wrap">
+    <view class="card-area">
+        <onekit-canvas 
+            class="onekit-canvas canvas" 
+            canvas-id="myCanvas" 
+            disable-scroll="false" 
+            bindtouchstart="touchstart"
+            bindtouchmove="touchmove"
+            bindtouchend="touchend"
+            bindtouchcancel="touchcancel"
+            bindlongtap="longtap"
+            binderror="error">
+        </onekit-canvas>
     </view>
-    <swan-button  class="btn" type="primary" bindtap="showcanvas">展示canvas</swan-button>
-    <swan-button  class="btn" type="primary" bindtap="delcanvas">删除canvas</swan-button>
-    <swan-button  class="btn" type="primary" bindtap="sendadraw">执行一条绘制指令</swan-button>
 </view>
