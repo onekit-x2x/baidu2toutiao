@@ -76,66 +76,66 @@ Component({
   methods: {
     // 自定义方法
     view_tap: function () {
-      console.log("dddddd",this.properties["openType"]);
+      console.log("dddddd", this.properties["openType"]);
       var app_id = this.properties["appId"];
       var version = this.properties["version"];
-      
-      console.log("appid:",app_id);
-      console.log("version:",version);
-      switch(this.properties["target"]){
+
+      console.log("appid:", app_id);
+      console.log("version:", version);
+      switch (this.properties["target"]) {
         case "self":
-        this._target_self();
-        break;
-        
-        case "miniProgram":
-        console.log("aaa");
-         this._target_miniProgram();
-        break;
-      }
-      
-    },
-    _target_self(){
-      var url = this.properties["url"];
-      switch (this.properties["openType"]){
-             case "redirectTo":
-           tt.redirectTo({
-               url: url
-               });
-           break;
-        case "navigateBack":
-           tt.navigateBack();
+          this._target_self();
           break;
-          case "navigate":
-           if(this.properties["redirect"]){
-              console.log("sss");
-              tt.redirectTo({
+
+        case "miniProgram":
+          console.log("aaa");
+          this._target_miniProgram();
+          break;
+      }
+
+    },
+    _target_self() {
+      var url = this.properties["url"];
+      switch (this.properties["openType"]) {
+        case "redirectTo":
+          tt.redirectTo({
+            url: url
+          });
+          break;
+        case "navigateBack":
+          tt.navigateBack();
+          break;
+        case "navigate":
+          if (this.properties["redirect"]) {
+            console.log("sss");
+            tt.redirectTo({
               url: url,
 
-               });
-           }else{
-              tt.navigateTo({
-               url: url
-               });
-           }
-          
+            });
+          } else {
+            tt.navigateTo({
+              url: url
+            });
+          }
+
           break;
         default:
-        break;
+          break;
       }
     },
-    _target_miniProgram(){
+    _target_miniProgram() {
       var appId = this.properties.appId;
-      console.log("xxxxx:",appId);
+      console.log("xxxxx:", appId);
       //  "tta6cdd07039e72db5"
-       tt.navigateToMiniProgram({
-           appId : "tta6cdd07039e72db5",
-           success(e){
-             console.log("ddddd",e);
-           },
-           fail(e){
-             console.log(e);
-           }
-        });
+      tt.navigateToMiniProgram({
+        appId: "tta6cdd07039e72db5",
+        success(e) {
+          console.log("ddddd", e);
+        },
+        fail(e) {
+          console.log(e);
+        }
+      });
     }
 
   }
