@@ -5,7 +5,7 @@
         <view class="mode-title-line-right"></view>
     </view>
     <view class="card-area" tt:for="{{scaleArray}}">
-        <onekit-image Class="image-area {{item.hasBackgroud == 1 ? 'backGround': ''}}" data-name="{{item.mode}}" bindtap="onTap" mode="{{item.mode}}" src="{{src}}" binderror="imageError" bindload="imageLoad" />
+        <onekit-image Class="onekit-image image-area {{item.hasBackgroud == 1 ? 'backGround': ''}}" data-name="{{item.mode}}" bindtap="onTap" mode="{{item.mode}}" src="{{src}}" binderror="imageError" bindload="imageLoad" />
         <view class="bottom-description">{{item.text}}</view>
     </view>
     <view class="mode-title" style="margin-top: .5rem">

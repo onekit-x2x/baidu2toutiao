@@ -1,5 +1,5 @@
 <image 
-class="onekit-image {{Class}}"
+
 style="{{Style}}"
 mode="{{mode}}" 
 src="{{src}}"

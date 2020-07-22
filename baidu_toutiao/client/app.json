@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/navigator/navigator",
+    "pages/image/image",
     "pages/canvas/canvas",
     "pages/video/video"
   ],
