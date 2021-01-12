@@ -1,6 +1,7 @@
 {
   "pages": [
-    "example/index"
+    "li/li",
+    "zeng/zeng"
   ],
   "window": {
     "navigationBarTextStyle": "black",
