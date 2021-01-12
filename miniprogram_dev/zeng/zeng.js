@@ -1,12 +1,18 @@
 // zeng/zeng.js
-import {OnekitPage, swan} from '../baidu2toutiao/index';
+import {
+  OnekitPage,
+  swan
+} from '../baidu2toutiao/index'
+
 OnekitPage({
   data: {
 
   },
-  onLoad: function () {
-    
-          console.log(tt.canIUse('getImageInfo'))
-
+  onLoad() {
+    // eslint-disable-next-line no-console
+    console.log('okokoik')
+    // eslint-disable-next-line no-console
+    // console.log(swan)
+    swan.yy()
   }
 })

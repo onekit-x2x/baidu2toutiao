@@ -1,8 +1,6 @@
 {
   "pages": [
-    "zeng/zeng",
-    "li/li"
-    
+    "zeng/zeng"
   ],
   "window": {
     "navigationBarTextStyle": "black",

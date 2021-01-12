@@ -340,4 +340,20 @@ export default class swan {
   static getImageInfo(object) {
     return tt.getImageInfo(object)
   }
+
+  static saveImageToPhotosAlbum(object) {
+    return tt.saveImageToPhotosAlbum(object)
+  }
+
+  static chooseImage(object) {
+    return tt.chooseImage(object)
+  }
+
+  static chooseAlbum() {
+    return console.warn('chooseAlbum is not support')
+  }
+
+  static compressImage(object) {
+    return tt.compressImage(object)
+  }
 }
