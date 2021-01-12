@@ -219,23 +219,22 @@ var _PROMISE2 = _interopRequireDefault(_PROMISE);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /* eslint-disable no-undef */
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /* eslint-disable consistent-return */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-undef */
 /* eslint-disable no-console */
 /* eslint-disable camelcase */
 
+
+// import OneKit from './js/OneKit'
 
 var swan = function () {
   function swan() {
     _classCallCheck(this, swan);
   }
 
-  swan.yy = function yy() {
-    console.log('yy');
-  };
-
   // ///////////// version //////////////
-
-
   swan.canIUse = function canIUse(schema) {
     return tt.canIUse(schema);
   };
@@ -281,42 +280,27 @@ var swan = function () {
   };
 
   // ///////////// URLQuery //////////////
+  // static setURLQuery(urlQuery) {
+  //   const page = OneKit.current()
+  //   const oldURLQuery = page.query
+  //   const newURLQuery = oldURLQuery
+  //   for (const key of Object.keys(urlQuery)) {
+  //     const value = urlQuery[key]
+  //     newURLQuery[key] = value
+  //   }
+  //   page.query = newURLQuery
+  //   if (page.onURLQueryChange) {
+  //     page.onURLQueryChange({
+  //       oldURLQuery,
+  //       newURLQuery
+  //     })
+  //   }
+  // }
 
-
-  swan.setURLQuery = function setURLQuery(urlQuery) {
-    var page = OneKit.current();
-    var oldURLQuery = page.query;
-    var newURLQuery = oldURLQuery;
-    for (var _iterator = Object.keys(urlQuery), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
-
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
-      }
-
-      var key = _ref;
-
-      var value = urlQuery[key];
-      newURLQuery[key] = value;
-    }
-    page.query = newURLQuery;
-    if (page.onURLQueryChange) {
-      page.onURLQueryChange({
-        oldURLQuery: oldURLQuery,
-        newURLQuery: newURLQuery
-      });
-    }
-  };
-
-  swan.getURLQuery = function getURLQuery() {
-    var page = OneKit.current();
-    return page.query;
-  };
+  // static getURLQuery() {
+  //   const page = OneKit.current()
+  //   return page.query
+  // }
 
   // ///////////// update //////////////
 
@@ -400,32 +384,44 @@ var swan = function () {
 
 
   swan.connectSocket = function connectSocket(object) {
-    this.SocketTask = tt.connectSocket(object);
-    return SocketTask;
+    var swan_res = tt.connectSocket(object);
+    getApp().onekit_SocketTask = swan_res;
   };
 
   swan.sendSocketMessage = function sendSocketMessage(object) {
-    return SocketTask.send(object);
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.send(object);
+    }
   };
 
   swan.closeSocket = function closeSocket(object) {
-    return SocketTask.close(object);
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.close(object);
+    }
   };
 
   swan.onSocketOpen = function onSocketOpen(callback) {
-    return SocketTask.onOpen(callback);
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onOpen(callback);
+    }
   };
 
   swan.onSocketError = function onSocketError(callback) {
-    return SocketTask.onError(callback);
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onError(callback);
+    }
   };
 
   swan.onSocketMessage = function onSocketMessage(callback) {
-    return SocketTask.onMessage(callback);
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onMessage(callback);
+    }
   };
 
   swan.onSocketClose = function onSocketClose(callback) {
-    return SocketTask.onClose(callback);
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onClose(callback);
+    }
   };
 
   // ///////////// Toast //////////////

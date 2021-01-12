@@ -1,7 +1,11 @@
+/* eslint-disable consistent-return */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 /* eslint-disable camelcase */
 import PROMISE from '../node_modules/oneutil/PROMISE'
+// import OneKit from './js/OneKit'
 
 export default class swan {
   // ///////////// version //////////////
@@ -48,27 +52,27 @@ export default class swan {
   }
 
   // ///////////// URLQuery //////////////
-  static setURLQuery(urlQuery) {
-    const page = OneKit.current()
-    const oldURLQuery = page.query
-    const newURLQuery = oldURLQuery
-    for (const key of Object.keys(urlQuery)) {
-      const value = urlQuery[key]
-      newURLQuery[key] = value
-    }
-    page.query = newURLQuery
-    if (page.onURLQueryChange) {
-      page.onURLQueryChange({
-        oldURLQuery,
-        newURLQuery
-      })
-    }
-  }
+  // static setURLQuery(urlQuery) {
+  //   const page = OneKit.current()
+  //   const oldURLQuery = page.query
+  //   const newURLQuery = oldURLQuery
+  //   for (const key of Object.keys(urlQuery)) {
+  //     const value = urlQuery[key]
+  //     newURLQuery[key] = value
+  //   }
+  //   page.query = newURLQuery
+  //   if (page.onURLQueryChange) {
+  //     page.onURLQueryChange({
+  //       oldURLQuery,
+  //       newURLQuery
+  //     })
+  //   }
+  // }
 
-  static getURLQuery() {
-    const page = OneKit.current()
-    return page.query
-  }
+  // static getURLQuery() {
+  //   const page = OneKit.current()
+  //   return page.query
+  // }
 
   // ///////////// update //////////////
   static getUpdateManager() {
@@ -140,32 +144,44 @@ export default class swan {
 
   // ///////////// webSocket //////////////
   static connectSocket(object) {
-    this.SocketTask = tt.connectSocket(object)
-    return SocketTask
+    const swan_res = tt.connectSocket(object)
+    getApp().onekit_SocketTask = swan_res
   }
 
   static sendSocketMessage(object) {
-    return SocketTask.send(object)
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.send(object)
+    }
   }
 
   static closeSocket(object) {
-    return SocketTask.close(object)
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.close(object)
+    }
   }
 
   static onSocketOpen(callback) {
-    return SocketTask.onOpen(callback)
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onOpen(callback)
+    }
   }
 
   static onSocketError(callback) {
-    return SocketTask.onError(callback)
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onError(callback)
+    }
   }
 
   static onSocketMessage(callback) {
-    return SocketTask.onMessage(callback)
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onMessage(callback)
+    }
   }
 
   static onSocketClose(callback) {
-    return SocketTask.onClose(callback)
+    if (getApp().onekit_SocketTask) {
+      return getApp().onekit_SocketTask.onClose(callback)
+    }
   }
 
   // ///////////// Toast //////////////
