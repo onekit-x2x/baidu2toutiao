@@ -241,6 +241,10 @@ var _RewardedVideoAd = __webpack_require__(53);
 
 var _RewardedVideoAd2 = _interopRequireDefault(_RewardedVideoAd);
 
+var _OneKit = __webpack_require__(54);
+
+var _OneKit2 = _interopRequireDefault(_OneKit);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /* eslint-disable consistent-return */
@@ -250,8 +254,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* eslint-disable no-console */
 /* eslint-disable camelcase */
 
-
-// import OneKit from './js/OneKit'
 
 var swan = function () {
   function swan() {
@@ -304,27 +306,46 @@ var swan = function () {
   };
 
   // ///////////// URLQuery //////////////
-  // static setURLQuery(urlQuery) {
-  //   const page = OneKit.current()
-  //   const oldURLQuery = page.query
-  //   const newURLQuery = oldURLQuery
-  //   for (const key of Object.keys(urlQuery)) {
-  //     const value = urlQuery[key]
-  //     newURLQuery[key] = value
-  //   }
-  //   page.query = newURLQuery
-  //   if (page.onURLQueryChange) {
-  //     page.onURLQueryChange({
-  //       oldURLQuery,
-  //       newURLQuery
-  //     })
-  //   }
-  // }
 
-  // static getURLQuery() {
-  //   const page = OneKit.current()
-  //   return page.query
-  // }
+
+  swan.setURLQuery = function setURLQuery(urlQuery) {
+    var page = _OneKit2.default.current();
+    var oldURLQuery = page.query;
+    var newURLQuery = oldURLQuery;
+    for (var _iterator = Object.keys(urlQuery), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+      var _ref;
+
+      if (_isArray) {
+        if (_i >= _iterator.length) break;
+        _ref = _iterator[_i++];
+      } else {
+        _i = _iterator.next();
+        if (_i.done) break;
+        _ref = _i.value;
+      }
+
+      var key = _ref;
+
+      var value = urlQuery[key];
+      newURLQuery[key] = value;
+    }
+    page.query = newURLQuery;
+    getApp().onekit_URLQuery = 0;
+  };
+
+  swan.getURLQuery = function getURLQuery() {
+    var page = _OneKit2.default.current();
+    return page.query;
+  };
+
+  swan.onURLQueryChange = function onURLQueryChange() {
+    if (getApp().onekit_URLQuery === 0) {
+      var swan_res = {
+        errMsg: 'onURLQueryChange: ok'
+      };
+      return swan_res;
+    }
+  };
 
   // ///////////// update //////////////
 
@@ -1618,6 +1639,78 @@ var RewardedVideoAd = function () {
 }();
 
 exports.default = RewardedVideoAd;
+
+/***/ }),
+
+/***/ 54:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
+
+var bd_USER_FOLDER = 'bdfile://store/';
+var tt_USER_FOLDER = tt.env.USER_DATA_PATH + '/';
+
+function current() {
+  var pages = getCurrentPages();
+  if (pages.length === 0) {
+    return {};
+  }
+  return pages[pages.length - 1];
+}
+
+function currentUrl() {
+  return current().route;
+}
+
+function new_bd_filePath(ext) {
+  var randomString = Math.floor(Math.random() * (1 - 10000000) + 10000000);
+  var bd_filePath = '' + bd_USER_FOLDER + randomString + ext;
+  return bd_filePath;
+}
+
+function bd_filePath2tt_filePath(bd_filePath) {
+  // eslint-disable-next-line no-undef
+  if (!getApp().bdSavePath2ttStorePath) {
+    return bd_filePath;
+  }
+  // eslint-disable-next-line no-undef
+  var tt_storePath = getApp().bdSavePath2ttStorePath[bd_filePath];
+  if (tt_storePath) {
+    return tt_storePath;
+  } else {
+    var tt_filePath = bd_filePath.replace(bd_USER_FOLDER, tt_USER_FOLDER);
+    return tt_filePath;
+  }
+}
+
+function save_tt_storePath(bd_filePath, tt_storePath) {
+  // eslint-disable-next-line no-undef
+  if (!getApp().bdSavePath2ttStorePath) {
+    // eslint-disable-next-line no-undef
+    getApp().bdSavePath2ttStorePath = {};
+  }
+  // eslint-disable-next-line no-undef
+  getApp().bdSavePath2ttStorePath[bd_filePath] = tt_storePath;
+  // ///////////////////////
+  // eslint-disable-next-line no-undef
+  if (!getApp().ttStorePath2bdSavePath) {
+    // eslint-disable-next-line no-undef
+    getApp().ttStorePath2bdSavePath = {};
+  }
+  // eslint-disable-next-line no-undef
+  getApp().ttStorePath2bdSavePath[tt_storePath] = bd_filePath;
+}
+module.exports = {
+  current: current,
+  currentUrl: currentUrl,
+  save_tt_storePath: save_tt_storePath,
+  new_bd_filePath: new_bd_filePath,
+  bd_filePath2tt_filePath: bd_filePath2tt_filePath
+};
 
 /***/ })
 

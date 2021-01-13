@@ -11,7 +11,7 @@ import VideoContext from './api/VideoContext'
 import LivePlayerContext from './api/LivePlayerContext'
 import MapContext from './api/MapContext'
 import RewardedVideoAd from './api/RewardedVideoAd'
-// import OneKit from './js/OneKit'
+import OneKit from './js/OneKit'
 
 export default class swan {
   // ///////////// version //////////////
@@ -58,27 +58,31 @@ export default class swan {
   }
 
   // ///////////// URLQuery //////////////
-  // static setURLQuery(urlQuery) {
-  //   const page = OneKit.current()
-  //   const oldURLQuery = page.query
-  //   const newURLQuery = oldURLQuery
-  //   for (const key of Object.keys(urlQuery)) {
-  //     const value = urlQuery[key]
-  //     newURLQuery[key] = value
-  //   }
-  //   page.query = newURLQuery
-  //   if (page.onURLQueryChange) {
-  //     page.onURLQueryChange({
-  //       oldURLQuery,
-  //       newURLQuery
-  //     })
-  //   }
-  // }
+  static setURLQuery(urlQuery) {
+    const page = OneKit.current()
+    const oldURLQuery = page.query
+    const newURLQuery = oldURLQuery
+    for (const key of Object.keys(urlQuery)) {
+      const value = urlQuery[key]
+      newURLQuery[key] = value
+    }
+    page.query = newURLQuery
+    getApp().onekit_URLQuery = 0
+  }
 
-  // static getURLQuery() {
-  //   const page = OneKit.current()
-  //   return page.query
-  // }
+  static getURLQuery() {
+    const page = OneKit.current()
+    return page.query
+  }
+
+  static onURLQueryChange() {
+    if (getApp().onekit_URLQuery === 0) {
+      const swan_res = {
+        errMsg: 'onURLQueryChange: ok'
+      }
+      return swan_res
+    }
+  }
 
   // ///////////// update //////////////
   static getUpdateManager() {
