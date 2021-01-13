@@ -1,6 +1,8 @@
 <switch
-class="onekit-switch {{Class}}"
-style="{{Style}}"
+class="onekit-switch {{onekitClass}}"
+style="{{onekitStyle}}"
+id="{{onekitId}}"
+
 checked="{{checked}}"
 type="{{type}}"
 disabled="{{disabled}}"

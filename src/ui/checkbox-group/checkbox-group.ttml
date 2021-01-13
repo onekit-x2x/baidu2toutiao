@@ -1,6 +1,8 @@
 <checkbox-group
-class="onekit-checkbox-group {{Class}}"
-style="{{Style}}"
+class="onekit-checkbox-group {{onekitClass}}"
+style="{{onekitStyle}}"
+id="{{onekitId}}"
+
 
 bindchange="checkboxGroup_change"
 >

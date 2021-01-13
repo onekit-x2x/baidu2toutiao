@@ -1,7 +1,9 @@
 <!--onekit/ui/swiper/swiper.wxml-->
 <swiper
-class="onekit-swiper {{Class}}"
-style="{{Style}}"
+class="onekit-swiper {{onekitClass}}"
+style="{{onekitStyle}}"
+id="{{onekitId}}"
+
 indicator-dots="{{indicatorDots}}"
 indicator-color="{{indicatorColor}}"
 indicator-active-color="{{indicatorActiveColor}}"

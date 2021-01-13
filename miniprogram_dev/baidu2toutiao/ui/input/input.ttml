@@ -1,6 +1,8 @@
 <input
-class="onekit-input {{Class}}"
-style="{{Style}}"
+class="onekit-input {{onekitClass}}"
+style="{{onekitStyle}}"
+id="{{onekitId}}"
+
 value="{{value}}"
 type="{{type}}"
 password="{{password}}"

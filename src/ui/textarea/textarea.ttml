@@ -1,6 +1,8 @@
 <textarea
-class="onekit-input {{Class}}"
-style="{{Style}}"
+class="onekit-input {{onekitClass}}"
+style="{{onekitStyle}}"
+id="{{onekitId}}"
+
 name="{{name}}"
 value="{{value}}"
 placeholder="{{placeholder}}"

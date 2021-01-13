@@ -1,6 +1,8 @@
 <radio
-class="onekit-radio {{Class}}"
-style="{{Style}}"
+class="onekit-radio {{onekitClass}}"
+style="{{onekitStyle}}"
+id="{{onekitId}}"
+
 value="{{value}}"
 checked="{{checked}}"
 disabled="{{disabled}}"

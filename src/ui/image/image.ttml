@@ -1,6 +1,8 @@
 <image 
 
-style="{{Style}}"
+style="{{onekitStyle}}"
+id="{{onekitId}}"
+
 mode="{{mode}}" 
 src="{{src}}"
 lazy-load="{{lazyLoad}}"
