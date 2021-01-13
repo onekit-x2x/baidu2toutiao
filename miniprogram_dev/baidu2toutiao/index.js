@@ -298,11 +298,11 @@ var swan = function () {
         getApp().onekit_onPageNotFound(res);
       }
     });
-    this._onPageNotFound = callback;
+    getApp().onekit_onPageNotFound = callback;
   };
 
   swan.offPageNotFound = function offPageNotFound() {
-    this._offPageNotFound = null;
+    getApp().onekit_onPageNotFound = null;
   };
 
   // ///////////// URLQuery //////////////
@@ -596,8 +596,8 @@ var swan = function () {
   // ///////////// nextTick //////////////
 
 
-  swan.nextTick = function nextTick() {
-    return console.warn('nextTick is not support');
+  swan.nextTick = function nextTick(callback) {
+    return setTimeout(callback, 500);
   };
 
   // ///////////// menu //////////////

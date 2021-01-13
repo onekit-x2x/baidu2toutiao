@@ -9,12 +9,10 @@ OnekitPage({
 
   },
   onLoad() {
-    swan.setURLQuery({channel: 'asda'})
-    console.log(swan.onURLQueryChange())
-    
-   
-    const newURLQuery = swan.getURLQuery();
-            console.log(newURLQuery)
+    swan.nextTick(res=>{
+      console.log('heihei')
+    })
+    console.log('hello')
 
             
 

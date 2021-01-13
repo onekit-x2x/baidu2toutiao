@@ -50,11 +50,11 @@ export default class swan {
         getApp().onekit_onPageNotFound(res)
       }
     })
-    this._onPageNotFound = callback
+    getApp().onekit_onPageNotFound = callback
   }
 
   static offPageNotFound() {
-    this._offPageNotFound = null
+    getApp().onekit_onPageNotFound = null
   }
 
   // ///////////// URLQuery //////////////
@@ -303,8 +303,8 @@ export default class swan {
   }
 
   // ///////////// nextTick //////////////
-  static nextTick() {
-    return console.warn('nextTick is not support')
+  static nextTick(callback) {
+    return setTimeout(callback, 500)
   }
 
   // ///////////// menu //////////////
